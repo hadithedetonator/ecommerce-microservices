@@ -23,7 +23,14 @@ async def process_message(message: aio_pika.IncomingMessage):
 
 async def main():
     print(f" [*] Connecting to RabbitMQ at {RABBITMQ_URL}")
-    connection = await aio_pika.connect_robust(RABBITMQ_URL)
+    
+    connection = None
+    while connection is None:
+        try:
+            connection = await aio_pika.connect_robust(RABBITMQ_URL)
+        except Exception as e:
+            print(f" [!] Connection failed ({e}). Retrying in 5 seconds...")
+            await asyncio.sleep(5)
     
     async with connection:
         channel = await connection.channel()

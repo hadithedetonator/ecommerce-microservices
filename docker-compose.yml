@@ -21,6 +21,7 @@ services:
     environment:
       - SERVICE_NAME=user_service
       - DATABASE_URL=sqlite+aiosqlite:///./test.db
+      - PYTHONUNBUFFERED=1
     networks:
       - microservice_network
 
@@ -34,6 +35,7 @@ services:
       - SERVICE_NAME=order_service
       - DATABASE_URL=sqlite+aiosqlite:///./orders.db
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq/
+      - PYTHONUNBUFFERED=1
     depends_on:
       - rabbitmq
     networks:
@@ -47,6 +49,7 @@ services:
     environment:
       - SERVICE_NAME=notification_service
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq/
+      - PYTHONUNBUFFERED=1
     depends_on:
       - rabbitmq
     networks:

@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from typing import List
 
-from . import crud, models, schemas, database
+import crud, models, schemas, database
 
 app = FastAPI(title="User Service")
 

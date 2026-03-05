@@ -1,6 +1,6 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from . import models, schemas
+import models, schemas
 
 async def get_users(db: AsyncSession):
     result = await db.execute(select(models.User))
