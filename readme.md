@@ -14,6 +14,7 @@ A demonstration of a microservices architecture using FastAPI, Docker, RabbitMQ,
 ### Prerequisites
 
 - Docker and Docker Compose
+- Python 3.12+ (for local development)
 
 ### Running with Docker
 
