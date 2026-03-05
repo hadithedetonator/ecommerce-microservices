@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  user_service:
+    build: ./user_service
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./user_service:/app
+    environment:
+      - SERVICE_NAME=user_service
+
+  order_service:
+    build: ./order_service
+    ports:
+      - "5002:5000"
+    volumes:
+      - ./order_service:/app
+    environment:
+      - SERVICE_NAME=order_service
+
+  notification_service:
+    build: ./notification_service
+    ports:
+      - "5003:5000"
+    volumes:
+      - ./notification_service:/app
+    environment:
+      - SERVICE_NAME=notification_service
