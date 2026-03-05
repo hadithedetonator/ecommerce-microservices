@@ -4,3 +4,4 @@ sqlalchemy[asyncio]
 aiosqlite
 pydantic
 python-multipart
+aio-pika

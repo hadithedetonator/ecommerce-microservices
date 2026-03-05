@@ -1,19 +1,19 @@
 # Mini E-commerce Microservices
 
-A demonstration of a microservices architecture using FastAPI, Docker, and Async SQLAlchemy.
+A demonstration of a microservices architecture using FastAPI, Docker, RabbitMQ, and Async SQLAlchemy.
 
 ## Services
 
 1.  **User Service**: Manages user registration and profiles. (FastAPI, Async SQLAlchemy, SQLite)
-2.  **Order Service**: Manages order creation and tracking. (FastAPI, Async SQLAlchemy, SQLite)
-3.  **Notification Service**: (Placeholder) Sends notifications.
+2.  **Order Service**: Manages order creation and tracking. Publishes events to RabbitMQ. (FastAPI, Async SQLAlchemy, SQLite, aio-pika)
+3.  **Notification Service**: (Placeholder) Will consume events from RabbitMQ and send notifications.
+4.  **RabbitMQ**: Message broker used for asynchronous communication between services.
 
 ## Getting Started
 
 ### Prerequisites
 
 - Docker and Docker Compose
-- Python 3.11+ (for local development)
 
 ### Running with Docker
 
@@ -22,6 +22,8 @@ To start all services:
 ```bash
 docker-compose up --build
 ```
+
+Access RabbitMQ Management UI: [http://localhost:15672](http://localhost:15672) (guest/guest)
 
 ### API Endpoints
 
@@ -32,7 +34,8 @@ docker-compose up --build
 
 #### Order Service (Port 5002)
 - `GET /orders`: Retrieve all orders.
-- `POST /orders`: Create a new order.
+- `POST /orders`: Create a new order. 
+  - *Publishes `order_created` event to `order_events` queue.*
   - Body: `{"user_id": 1, "product_name": "Laptop", "amount": 999.99}`
 
 ## Project Structure
