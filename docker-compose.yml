@@ -9,6 +9,8 @@ services:
     environment:
       - RABBITMQ_DEFAULT_USER=guest
       - RABBITMQ_DEFAULT_PASS=guest
+    networks:
+      - microservice_network
 
   user_service:
     build: ./user_service
@@ -18,6 +20,9 @@ services:
       - ./user_service:/app
     environment:
       - SERVICE_NAME=user_service
+      - DATABASE_URL=sqlite+aiosqlite:///./test.db
+    networks:
+      - microservice_network
 
   order_service:
     build: ./order_service
@@ -27,14 +32,16 @@ services:
       - ./order_service:/app
     environment:
       - SERVICE_NAME=order_service
+      - DATABASE_URL=sqlite+aiosqlite:///./orders.db
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq/
     depends_on:
       - rabbitmq
+    networks:
+      - microservice_network
 
   notification_service:
     build: ./notification_service
-    ports:
-      - "5003:5000"
+    # notification service doesn't need to expose ports as it's a consumer
     volumes:
       - ./notification_service:/app
     environment:
@@ -42,3 +49,9 @@ services:
       - RABBITMQ_URL=amqp://guest:guest@rabbitmq/
     depends_on:
       - rabbitmq
+    networks:
+      - microservice_network
+
+networks:
+  microservice_network:
+    driver: bridge
