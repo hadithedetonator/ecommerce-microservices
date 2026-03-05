@@ -143,12 +143,5 @@ You can also test using `curl` or Postman:
 
 ---
 
-## 🏷️ Suggested Tags / Topics
-To improve discoverability on GitHub, I recommend adding these tags to your repository:
-
-`microservices` `fastapi` `rabbitmq` `event-driven` `python` `docker-compose` `asyncio` `sqlalchemy` `backend-development` `distributed-systems` `aio-pika` `rest-api`
-
----
-
 ## 🤝 Contributing
 Feel free to open issues or submit pull requests to enhance the functionality!
