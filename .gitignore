@@ -11,3 +11,6 @@ venv/
 
 # Docker
 .docker/
+
+# DB
+*.db
